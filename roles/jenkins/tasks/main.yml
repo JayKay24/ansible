@@ -20,24 +20,12 @@
 
 - name: Install Jenkins
   yum:
-    name: jenkins-2.99
+    name: jenkins-2.176.1-1.1
     enablerepo: jenkins
     state: present
 
 - name: Start Jenkins
   service:
     name: jenkins
-    enabled: true
+    enabled: yes
     state: started
-
-- name: Sleep for 30 seconds and continue with play
-  wait_for: timeout=30
-
-- name: Get init password Jenkins
-  shell: cat /var/lib/jenkins/secrets/initialAdminPassword
-  changed_when: false
-  register: result
-
-- name: Print init password Jenkins
-  debug:
-    var: result.stdout
